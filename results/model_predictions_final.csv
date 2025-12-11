@@ -1,0 +1,26 @@
+Fold,Model,Target,Index,TrueValue,PredictedValue
+1,Tangent All Data,h_CAD_mm,0,40.0,25.446192354611604
+1,Neural Network,psi_CAD_deg,0,,40.81379833741887
+1,Neural Network,h_CAD_mm,0,,25.74323280603304
+1,Neural Network,psi_CAD_deg,0,,40.81629822949934
+1,Neural Network,h_CAD_mm,0,,25.746223879131644
+2,Tangent All Data,h_CAD_mm,0,40.0,25.444745752685495
+2,Neural Network,psi_CAD_deg,0,,40.81679199119076
+2,Neural Network,h_CAD_mm,0,,25.774729710531847
+2,Neural Network,psi_CAD_deg,0,,40.815997473863455
+2,Neural Network,h_CAD_mm,0,,25.730355011476846
+3,Tangent All Data,h_CAD_mm,0,40.0,25.455106312019897
+3,Neural Network,psi_CAD_deg,0,,40.80769595255707
+3,Neural Network,h_CAD_mm,0,,25.728548944776488
+3,Neural Network,psi_CAD_deg,0,,40.82069811610458
+3,Neural Network,h_CAD_mm,0,,25.721472961981487
+4,Tangent All Data,h_CAD_mm,0,40.0,25.45823510806208
+4,Neural Network,psi_CAD_deg,0,,40.81633327293211
+4,Neural Network,h_CAD_mm,0,,25.7221989479688
+4,Neural Network,psi_CAD_deg,0,,40.81599969065275
+4,Neural Network,h_CAD_mm,0,,25.728242858402687
+5,Tangent All Data,h_CAD_mm,0,40.0,25.453026085141666
+5,Neural Network,psi_CAD_deg,0,,40.81566896333576
+5,Neural Network,h_CAD_mm,0,,25.750517233353236
+5,Neural Network,psi_CAD_deg,0,,40.80845076645829
+5,Neural Network,h_CAD_mm,0,,25.704795724466372

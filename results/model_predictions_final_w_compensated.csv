@@ -1,0 +1,71 @@
+Fold,Model,Target,Index,TrueValue,PredictedValue
+1,Linear Regression,psi_CAD_deg,0,40.0,40.72916909021609
+1,Linear Regression,h_CAD_mm,0,25.17,25.69751775011132
+1,Linear Regression,psi_CAD_deg,0,40.0,40.72916909021609
+1,Linear Regression,h_CAD_mm,0,25.17,25.69751775011132
+1,Tangent All Data,h_CAD_mm,0,40.0,25.29028558853682
+1,Linear Regression All Data (Angle),psi_CAD_deg,0,40.0,40.66831888176609
+1,Linear Regression All Data(Height),h_CAD_mm,0,40.0,25.658176109122376
+1,"Tangent model (sd_mm=0.7, d_t_mm=12.0)",h_CAD_mm,0,40.0,25.29028558853682
+1,"Linear height model (sd_mm=0.7, d_t_mm=12.0)",h_CAD_mm,0,40.0,25.658176109122376
+1,"Linear angle model (sd_mm=0.7, d_t_mm=12.0)",psi_CAD_deg,0,40.0,40.66831888176609
+1,Neural Network,psi_CAD_deg,0,,40.72715189392292
+1,Neural Network,h_CAD_mm,0,,25.702834097910447
+1,Neural Network,psi_CAD_deg,0,,40.72965120239818
+1,Neural Network,h_CAD_mm,0,,25.698466436479876
+2,Linear Regression,psi_CAD_deg,0,40.0,40.730546042891895
+2,Linear Regression,h_CAD_mm,0,25.17,25.69644337030441
+2,Linear Regression,psi_CAD_deg,0,40.0,40.730546042891895
+2,Linear Regression,h_CAD_mm,0,25.17,25.69644337030441
+2,Tangent All Data,h_CAD_mm,0,40.0,25.293495165426233
+2,Linear Regression All Data (Angle),psi_CAD_deg,0,40.0,40.672131683738996
+2,Linear Regression All Data(Height),h_CAD_mm,0,40.0,25.659373387752417
+2,"Tangent model (sd_mm=0.7, d_t_mm=12.0)",h_CAD_mm,0,40.0,25.293495165426233
+2,"Linear height model (sd_mm=0.7, d_t_mm=12.0)",h_CAD_mm,0,40.0,25.659373387752417
+2,"Linear angle model (sd_mm=0.7, d_t_mm=12.0)",psi_CAD_deg,0,40.0,40.672131683738996
+2,Neural Network,psi_CAD_deg,0,,40.722234423958895
+2,Neural Network,h_CAD_mm,0,,25.700267440443245
+2,Neural Network,psi_CAD_deg,0,,40.73065867132378
+2,Neural Network,h_CAD_mm,0,,25.696976979769396
+3,Linear Regression,psi_CAD_deg,0,40.0,40.73076328044002
+3,Linear Regression,h_CAD_mm,0,25.17,25.690460080716885
+3,Linear Regression,psi_CAD_deg,0,40.0,40.73076328044002
+3,Linear Regression,h_CAD_mm,0,25.17,25.690460080716885
+3,Tangent All Data,h_CAD_mm,0,40.0,25.299460225008936
+3,Linear Regression All Data (Angle),psi_CAD_deg,0,40.0,40.67253820470869
+3,Linear Regression All Data(Height),h_CAD_mm,0,40.0,25.65421022220361
+3,"Tangent model (sd_mm=0.7, d_t_mm=12.0)",h_CAD_mm,0,40.0,25.299460225008936
+3,"Linear height model (sd_mm=0.7, d_t_mm=12.0)",h_CAD_mm,0,40.0,25.65421022220361
+3,"Linear angle model (sd_mm=0.7, d_t_mm=12.0)",psi_CAD_deg,0,40.0,40.67253820470869
+3,Neural Network,psi_CAD_deg,0,,40.730627153640825
+3,Neural Network,h_CAD_mm,0,,25.69016747219559
+3,Neural Network,psi_CAD_deg,0,,40.73023116449255
+3,Neural Network,h_CAD_mm,0,,25.690580873057385
+4,Linear Regression,psi_CAD_deg,0,40.0,40.728883336043836
+4,Linear Regression,h_CAD_mm,0,25.17,25.690412356370697
+4,Linear Regression,psi_CAD_deg,0,40.0,40.728883336043836
+4,Linear Regression,h_CAD_mm,0,25.17,25.690412356370697
+4,Tangent All Data,h_CAD_mm,0,40.0,25.296889416372764
+4,Linear Regression All Data (Angle),psi_CAD_deg,0,40.0,40.66552398166835
+4,Linear Regression All Data(Height),h_CAD_mm,0,40.0,25.651890388091278
+4,"Tangent model (sd_mm=0.7, d_t_mm=12.0)",h_CAD_mm,0,40.0,25.296889416372764
+4,"Linear height model (sd_mm=0.7, d_t_mm=12.0)",h_CAD_mm,0,40.0,25.651890388091278
+4,"Linear angle model (sd_mm=0.7, d_t_mm=12.0)",psi_CAD_deg,0,40.0,40.66552398166835
+4,Neural Network,psi_CAD_deg,0,,40.7283548319165
+4,Neural Network,h_CAD_mm,0,,25.68374016571364
+4,Neural Network,psi_CAD_deg,0,,40.72868317503155
+4,Neural Network,h_CAD_mm,0,,25.69121579704334
+5,Linear Regression,psi_CAD_deg,0,40.0,40.731888830636755
+5,Linear Regression,h_CAD_mm,0,25.17,25.691676974617824
+5,Linear Regression,psi_CAD_deg,0,40.0,40.731888830636755
+5,Linear Regression,h_CAD_mm,0,25.17,25.691676974617824
+5,Tangent All Data,h_CAD_mm,0,40.0,25.298263190417266
+5,Linear Regression All Data (Angle),psi_CAD_deg,0,40.0,40.671649591307826
+5,Linear Regression All Data(Height),h_CAD_mm,0,40.0,25.65381551034372
+5,"Tangent model (sd_mm=0.7, d_t_mm=12.0)",h_CAD_mm,0,40.0,25.298263190417266
+5,"Linear height model (sd_mm=0.7, d_t_mm=12.0)",h_CAD_mm,0,40.0,25.65381551034372
+5,"Linear angle model (sd_mm=0.7, d_t_mm=12.0)",psi_CAD_deg,0,40.0,40.671649591307826
+5,Neural Network,psi_CAD_deg,0,,40.73276299006663
+5,Neural Network,h_CAD_mm,0,,25.692752091008135
+5,Neural Network,psi_CAD_deg,0,,40.73161707012587
+5,Neural Network,h_CAD_mm,0,,25.690317459705355
