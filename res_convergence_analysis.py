@@ -4,11 +4,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import sys
+#################################################################################
+# Change the base_path to your directory
+#################################################################################
 base_path = r'C:\Users\pucag\OneDrive - Universidade de Lisboa\Desktop\Dissertacao\codigos finais'
+#################################################################################
 for root, dirs, files in os.walk(base_path):
     sys.path.append(root)
 import divisaodedados
 
+#################################################################################
+#  Main script execution
+#################################################################################
 
 folder_path = base_path+ r'\sketch res'
 output_file = base_path+ r'\csv_files\angle_height_dataset_convergencia_pecas_res.csv'
@@ -16,6 +23,9 @@ output_file = base_path+ r'\csv_files\angle_height_dataset_convergencia_pecas_re
 # Uncomment the line below to run the data division process
 # divisaodedados.divisaodedados(folder_path, output_file)
 
+#################################################################################
+#  End of script modifications
+#################################################################################
 
 angle_height_dataset_path = output_file
 tempos = pd.read_csv(base_path+ r'\time\tempos mesh.txt', sep='\t', header=None)

@@ -5,16 +5,29 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 import sys
+#################################################################################
+# Change the base_path to your directory
+#################################################################################
 base_path = r'C:\Users\pucag\OneDrive - Universidade de Lisboa\Desktop\Dissertacao\codigos finais'
+#################################################################################
 for root, dirs, files in os.walk(base_path):
     sys.path.append(root)
 import divisaodedados
 import divisaodedadoscalco
 
+#################################################################################
+#  Main script execution
+#################################################################################
+
 namecsv = base_path+ r'\csv_files\calco.csv'
 folder_path = base_path+ r'\sketch calco'
 
-divisaodedadoscalco.process_igs_files_and_generate_csv(folder_path, namecsv)
+# Uncomment the line below to run the data division process
+# divisaodedadoscalco.process_igs_files_and_generate_csv(folder_path, namecsv)
+
+#################################################################################
+#  End of script modifications
+#################################################################################
 
 
 # After processing all files, calculate averages and variances by peça

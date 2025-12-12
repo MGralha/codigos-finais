@@ -5,131 +5,21 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import sys
 from scipy.spatial.distance import euclidean
+#################################################################################
+# Change the base_path to your directory
+#################################################################################
 base_path = r'C:\Users\pucag\OneDrive - Universidade de Lisboa\Desktop\Dissertacao\codigos finais'
+#################################################################################
 for root, dirs, files in os.walk(base_path):
     sys.path.append(root)
 import divisaodedados
 import modelos
 import shared_variables
+import comparedados
+
 #################################################################################
-
-# Helper to get sorted unique peças
-def get_sorted_pecas(peças):
-    # Keep only unique, preserve order in peça_order, then add the rest
-    peça_ordered = [p for p in peça_order if p in peças]
-    rest = [p for p in peças if p not in peça_ordered]
-    return peça_ordered + rest
-
-# When creating legends, use sorted order
-def sorted_legend_handles_labels(model_colors, present_pecas):
-    sorted_pecas = get_sorted_pecas(present_pecas)
-    handles = []
-    labels = []
-    for model in sorted_pecas:
-        color = model_colors.get(model, '#333333')
-        handles.append(plt.Rectangle((0,0),1,1, color=color))
-        labels.append(model)
-    return handles, labels
-
-# Patch plot_angle_difference_bar to use sorted legend
-def plot_angle_difference_bar(avg_non_compensated, avg_compensated, variable):
-    psi_diff_non_comp = avg_non_compensated[variable] - new_data[variable].iloc[0]
-    psi_diff_comp = avg_compensated[variable] - new_data[variable].iloc[0]
-
-    plt.figure(figsize=(10, 6))
-    for idx, peca in enumerate(avg_non_compensated.index):
-        color = model_colors.get(peca, '#333333')
-        plt.bar(
-            peca,
-            psi_diff_non_comp[peca],
-            color=color,
-            alpha=0.7,
-            label=f'Non-Compensated: {peca}' if idx == 0 else ""
-        )
-    for idx, peca in enumerate(avg_compensated.index):
-        color = model_colors.get(peca, '#333333')
-        plt.bar(
-            peca,
-            psi_diff_comp[peca],
-            color=color,
-            alpha=0.4,
-            label=f'Compensated: {peca}' if idx == 0 else ""
-        )
-    plt.xlabel('Peça')
-    plt.ylabel(f'Difference in {latex_labels.get(variable, variable)}')
-    plt.title(f'Difference in {latex_labels.get(variable, variable)} from New Data')
-    # Sorted legend
-    present_pecas = list(avg_non_compensated.index) + list(avg_compensated.index)
-    handles, labels = sorted_legend_handles_labels(model_colors, present_pecas)
-    plt.legend(handles, labels, title='Peça (Model)', bbox_to_anchor=(1.05, 1), loc='upper left')
-    plt.grid(True)
-    plt.axhline(0, color='black', linewidth=1, linestyle='--')
-    plt.tight_layout()
-    plt.show()
-peça_order = ['LRND', 'LRD', 'LRS', 'NN(8)', 'NN(16)']
-# For avg_non_compensated and avg_compensated, reindex if all are present
-def sort_peca_index(df):
-    existing = [p for p in peça_order if p in df.index]
-    rest = [p for p in df.index if p not in existing]
-    return df.reindex(existing + rest)
-
-
-def plot_angle_difference_bar(avg_non_compensated, avg_compensated, variable):
-    """
-    Plots a bar chart comparing the difference in angle (psi_D_deg) from new data
-    for non-compensated and compensated datasets.
-
-    Parameters:
-        avg_non_compensated (pd.DataFrame): DataFrame with non-compensated averages, indexed by 'Peça'.
-        avg_compensated (pd.DataFrame): DataFrame with compensated averages, indexed by 'Peça'.
-        psi_diff_non_comp (pd.Series): Difference in angle for non-compensated.
-        psi_diff_comp (pd.Series): Difference in angle for compensated.
-    """
-    # Calculate the difference between each average and the new data value
-    psi_diff_non_comp = avg_non_compensated[variable] - new_data[variable].iloc[0]
-    psi_diff_comp = avg_compensated[variable] - new_data[variable].iloc[0]
-
-
-    plt.figure(figsize=(8, 6))
-    handles = []
-    labels = []
-    # Plot non-compensated bars with model-specific colors
-    for idx, peca in enumerate(avg_non_compensated.index):
-        color = model_colors.get(peca, '#333333')
-        plt.bar(
-            peca,
-            psi_diff_non_comp[peca],
-            color=color,
-            label=f'Non-Compensated: {peca}' if idx == 0 else ""
-        )
-    # Plot compensated bars with model-specific colors (no hatch)
-    for idx, peca in enumerate(avg_compensated.index):
-        color = model_colors.get(peca, '#333333')
-        plt.bar(
-            peca,
-            psi_diff_comp[peca],
-            color=color,
-            label=f'Compensated: {peca}' if idx == 0 else ""
-        )
-    plt.xlabel('Peça', fontsize=16)
-    plt.ylabel(f'Difference in {latex_labels.get(variable, variable)}', fontsize=16)
-    plt.title(f'Difference in {latex_labels.get(variable, variable)} from New Data', fontsize=18)
-    # Custom legend for models
-    for model, color in model_colors.items():
-        handles.append(plt.Rectangle((0,0),1,1, color=color))
-        labels.append(model)
-    # plt.legend(
-    #     handles, labels, title='Peça (Model)',
-    #     bbox_to_anchor=(0.5, -0.15), loc='upper center',
-    #     ncol=max(1, len(handles)), fontsize=14, title_fontsize=15
-    # )
-    plt.grid(True)
-    plt.gcf().subplots_adjust(bottom=0.25)
-    plt.axhline(0, color='black', linewidth=1, linestyle='--')
-    plt.xticks(fontsize=14)
-    plt.yticks(fontsize=14)
-    plt.tight_layout()
-    plt.show()
+#  Main script execution
+#################################################################################
 
 
 angle_height_dataset_path = base_path + r'\csv_files\angle_height_dataset.csv'
@@ -137,6 +27,9 @@ compensated_angle_height_dataset_path = base_path + r'\csv_files\angle_height_co
 # Load the ensaios dataset
 ensaios_path = base_path + r'\csv_files\ensaios.csv'
 
+#################################################################################
+#  End of script modifications
+#################################################################################
 
 
 if os.path.exists(angle_height_dataset_path) and os.path.exists(compensated_angle_height_dataset_path):
@@ -152,9 +45,6 @@ if os.path.exists(angle_height_dataset_path) and os.path.exists(compensated_angl
     print(ensaios_dataset)
 else:
     print(f"One of the files does not exist.")
-
-
-
 
 
 if (
@@ -192,12 +82,11 @@ compensated_angle_height_dataset = compensated_angle_height_dataset[
 
 
 
-
 # For compensated_angle_height_dataset, set categorical order if Peça exists
 if 'Peça' in compensated_angle_height_dataset.columns:
     compensated_angle_height_dataset['Peça'] = pd.Categorical(
         compensated_angle_height_dataset['Peça'],
-        categories=peça_order + [p for p in compensated_angle_height_dataset['Peça'].unique() if p not in peça_order],
+        categories=shared_variables.peça_order + [p for p in compensated_angle_height_dataset['Peça'].unique() if p not in shared_variables.peça_order],
         ordered=True
     )
 
@@ -238,8 +127,8 @@ angle_height_dataset['Peça'] = angle_height_dataset['Peça'].replace({
 avg_compensated = compensated_angle_height_dataset.groupby('Peça')[['Angle (degrees)', 'Height']].mean()
 
 
-avg_non_compensated = sort_peca_index(avg_non_compensated)
-avg_compensated = sort_peca_index(avg_compensated)
+avg_non_compensated = comparedados.sort_peca_index(avg_non_compensated)
+avg_compensated = comparedados.sort_peca_index(avg_compensated)
 
 print("Average values for compensated:")
 print(avg_compensated)
@@ -274,46 +163,11 @@ compensated_angle_height_dataset = compensated_angle_height_dataset.rename(colum
     'Diameter': 'd_D_mm'
 })
 
-new_data = pd.DataFrame([{           
-        'psi_D_deg': 40,
-        'h_D_mm': 25.17,
-        'sd_mm': 0.7,
-        'd_t_mm': 12,
-        'd_D_mm': 20
-    }])
-
-
-latex_labels = {
-    'psi_D_deg': r'$\Psi_m \, [^o]$',
-    'h_D_mm': r'$h_m \, [mm]$',
-    'diam_D_mm': r'$d_m \, [mm]$',
-    'sd_mm': r'$sd \, [mm]$',
-    'd_t_mm': r'$d_t \, [mm]$',
-    'psi_CAD_deg': r'$\Psi_{CAD} \, [^o]$',
-    'h_CAD_mm': r'$h_{CAD} \, [mm]$'
-}
-
-
-
-
-# Define a color mapping for each specific model (Peça)
-model_colors = {
-    'LRND': "#FF0000",
-    'LRD': '#FF3399',
-    'LRS': '#002EC0',
-    'NN(8)': '#00C8BE',
-    'NN(16)': '#2BA02B',
-    'VII': "#454545",
-    'III': "#454545",
-    # Add more models and colors as needed
-}
-
-
 
 # Create a table with specific colors for each model
 if 'Peça' in compensated_angle_height_dataset.columns:
     unique_models = compensated_angle_height_dataset['Peça'].unique()
-    color_list = [model_colors.get(model, '#333333') for model in unique_models]
+    color_list = [shared_variables.model_colors.get(model, '#333333') for model in unique_models]
     table_data = []
     for model, color in zip(unique_models, color_list):
         table_data.append({
@@ -336,7 +190,7 @@ if 'Peça' in compensated_angle_height_dataset.columns:
     pecas = compensated_angle_height_dataset['Peça'].unique()
     for peca in pecas:
         subset = compensated_angle_height_dataset[compensated_angle_height_dataset['Peça'] == peca]
-        color = model_colors.get(peca, '#333333')  # Use color from model_colors, fallback to gray
+        color = shared_variables.model_colors.get(peca, '#333333')  # Use color from shared_variables.model_colors, fallback to gray
         plt.scatter(
             subset['psi_D_deg'],
             subset['h_D_mm'],
@@ -346,14 +200,14 @@ if 'Peça' in compensated_angle_height_dataset.columns:
         )
     # Add sorted legend
     present_pecas = list(pecas)
-    handles, labels = sorted_legend_handles_labels(model_colors, present_pecas)
+    handles, labels = comparedados.sorted_legend_handles_labels(shared_variables.model_colors, present_pecas)
     plt.legend(handles, labels, title='Peça (Model)', bbox_to_anchor=(1.05, 1), loc='upper left')
-    # Add vertical and horizontal lines passing through new_data values
-    plt.axvline(new_data['psi_D_deg'].iloc[0], color='gray', linestyle='--', linewidth=2, label='New Data psi_D_deg')
-    plt.axhline(new_data['h_D_mm'].iloc[0], color='gray', linestyle='--', linewidth=2, label='New Data h_D_mm')
-    plt.xlabel(latex_labels['psi_D_deg'])
-    plt.ylabel(latex_labels['h_D_mm'])
-    plt.title(f"{latex_labels['h_D_mm']} vs {latex_labels['psi_D_deg']} for Each Compensated Part (Colored by Peça)")
+    # Add vertical and horizontal lines passing through shared_variables.new_data values
+    plt.axvline(shared_variables.new_data['psi_D_deg'].iloc[0], color='gray', linestyle='--', linewidth=2, label='New Data psi_D_deg')
+    plt.axhline(shared_variables.new_data['h_D_mm'].iloc[0], color='gray', linestyle='--', linewidth=2, label='New Data h_D_mm')
+    plt.xlabel(shared_variables.latex_labels['psi_D_deg'])
+    plt.ylabel(shared_variables.latex_labels['h_D_mm'])
+    plt.title(f"{shared_variables.latex_labels['h_D_mm']} vs {shared_variables.latex_labels['psi_D_deg']} for Each Compensated Part (Colored by Peça)")
     plt.grid(True)
     plt.tight_layout()
     plt.show()
@@ -365,10 +219,10 @@ std_compensated = compensated_angle_height_dataset.groupby('Peça')[['psi_D_deg'
 print("Standard deviation for each Peça in compensated dataset:")
 print(std_compensated)
 
-psi_diff_non_comp = avg_non_compensated['psi_D_deg'] - new_data['psi_D_deg'].iloc[0]
-psi_diff_comp = avg_compensated['psi_D_deg'] - new_data['psi_D_deg'].iloc[0]
-height_diff_non_comp = avg_non_compensated['h_D_mm'] - new_data['h_D_mm'].iloc[0]     
-height_diff_comp = avg_compensated['h_D_mm'] - new_data['h_D_mm'].iloc[0]
+psi_diff_non_comp = avg_non_compensated['psi_D_deg'] - shared_variables.new_data['psi_D_deg'].iloc[0]
+psi_diff_comp = avg_compensated['psi_D_deg'] - shared_variables.new_data['psi_D_deg'].iloc[0]
+height_diff_non_comp = avg_non_compensated['h_D_mm'] - shared_variables.new_data['h_D_mm'].iloc[0]     
+height_diff_comp = avg_compensated['h_D_mm'] - shared_variables.new_data['h_D_mm'].iloc[0]
 
 print("psi_diff_non_comp:")
 print(psi_diff_non_comp)
@@ -378,8 +232,8 @@ print("height_diff_non_comp:")
 print(height_diff_non_comp)
 print("height_diff_comp:")
 print(height_diff_comp)
-plot_angle_difference_bar(avg_non_compensated, avg_compensated, 'psi_D_deg')
-plot_angle_difference_bar(avg_non_compensated, avg_compensated, 'h_D_mm')
+comparedados.plot_angle_difference_bar(avg_non_compensated, avg_compensated, 'psi_D_deg')
+comparedados.plot_angle_difference_bar(avg_non_compensated, avg_compensated, 'h_D_mm')
 
 # Example usage:
 # plot_angle_difference_bar(avg_non_compensated, avg_compensated, psi_diff_non_comp, psi_diff_comp)
@@ -387,11 +241,11 @@ plot_angle_difference_bar(avg_non_compensated, avg_compensated, 'h_D_mm')
 # Calculate Euclidean distance between each average and the new data point
 
 distances_non_comp = avg_non_compensated.apply(
-    lambda row: euclidean([row['psi_D_deg'], row['h_D_mm']], [new_data['psi_D_deg'].iloc[0], new_data['h_D_mm'].iloc[0]]),
+    lambda row: euclidean([row['psi_D_deg'], row['h_D_mm']], [shared_variables.new_data['psi_D_deg'].iloc[0], shared_variables.new_data['h_D_mm'].iloc[0]]),
     axis=1
 )
 distances_comp = avg_compensated.apply(
-    lambda row: euclidean([row['psi_D_deg'], row['h_D_mm']], [new_data['psi_D_deg'].iloc[0], new_data['h_D_mm'].iloc[0]]),
+    lambda row: euclidean([row['psi_D_deg'], row['h_D_mm']], [shared_variables.new_data['psi_D_deg'].iloc[0], shared_variables.new_data['h_D_mm'].iloc[0]]),
     axis=1
 )
 
@@ -405,7 +259,7 @@ plt.figure(figsize=(10, 6))
 
 # Plot non-compensated points with a default color (since they may not have a model/color mapping)
 for idx, (peca, x, y) in enumerate(zip(avg_non_compensated.index, psi_diff_non_comp, height_diff_non_comp)):
-    color = model_colors.get(peca, '#333333')
+    color = shared_variables.model_colors.get(peca, '#333333')
     plt.scatter(
         x, y,
         color=color,
@@ -415,7 +269,7 @@ for idx, (peca, x, y) in enumerate(zip(avg_non_compensated.index, psi_diff_non_c
 
 # Plot compensated points with their specific colors
 for idx, (peca, x, y) in enumerate(zip(avg_compensated.index, psi_diff_comp, height_diff_comp)):
-    color = model_colors.get(peca, '#333333')
+    color = shared_variables.model_colors.get(peca, '#333333')
     plt.scatter(
         x, y,
         color=color,
@@ -424,16 +278,16 @@ for idx, (peca, x, y) in enumerate(zip(avg_compensated.index, psi_diff_comp, hei
     )
 
 # Add axial lines for new data psi and height
-plt.axvline(0, color='black', linestyle='--', linewidth=2, label=f'{latex_labels["psi_D_deg"]} = 0')
-plt.axhline(0, color='black', linestyle='--', linewidth=2, label=f'{latex_labels["h_D_mm"]} = 0')
-plt.xlabel(f'Difference in {latex_labels["psi_D_deg"]}')
-plt.ylabel(f'Difference in {latex_labels["h_D_mm"]}')
+plt.axvline(0, color='black', linestyle='--', linewidth=2, label=f'{shared_variables.latex_labels["psi_D_deg"]} = 0')
+plt.axhline(0, color='black', linestyle='--', linewidth=2, label=f'{shared_variables.latex_labels["h_D_mm"]} = 0')
+plt.xlabel(f'Difference in {shared_variables.latex_labels["psi_D_deg"]}')
+plt.ylabel(f'Difference in {shared_variables.latex_labels["h_D_mm"]}')
 plt.title(f'Difference from New Data: Compensated vs Non-Compensated')
 
 # Create custom legend for models
 handles = []
 labels = []
-for model, color in model_colors.items():
+for model, color in shared_variables.model_colors.items():
     handles.append(plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=color, markersize=10))
     labels.append(model)
 plt.legend(handles, labels, title='Peça (Model)', bbox_to_anchor=(1.05, 1), loc='upper left')
@@ -457,20 +311,20 @@ sns.boxplot(
     data=compensated_angle_height_dataset,
     x='Peça',
     y='psi_D_deg',
-    palette=model_colors
+    palette=shared_variables.model_colors
 )
 plt.xlabel('Peça', fontsize=16)
-plt.ylabel(latex_labels.get('psi_D_deg', 'psi_D_deg'), fontsize=16)
-plt.title(f'Boxplot of {latex_labels.get("psi_D_deg", "psi_D_deg")} for merged dataset (input angle={latex_labels.get("psi_CAD_deg", "input angle")}=40, {latex_labels.get("sd_mm", "stepdown")}=0.7, {latex_labels.get("d_t_mm", "tool diameter")}=12)', fontsize=18)
+plt.ylabel(shared_variables.latex_labels.get('psi_D_deg', 'psi_D_deg'), fontsize=16)
+plt.title(f'Boxplot of {shared_variables.latex_labels.get("psi_D_deg", "psi_D_deg")} for merged dataset (input angle={shared_variables.latex_labels.get("psi_CAD_deg", "input angle")}=40, {shared_variables.latex_labels.get("sd_mm", "stepdown")}=0.7, {shared_variables.latex_labels.get("d_t_mm", "tool diameter")}=12)', fontsize=18)
 plt.grid(True, axis='y')
 plt.hlines(
-    y=new_data['psi_D_deg'].iloc[0],
+    y=shared_variables.new_data['psi_D_deg'].iloc[0],
     xmin=plt.gca().get_xlim()[0],
     xmax=plt.gca().get_xlim()[1],
     color='black',
     linestyle='--',
     linewidth=1,
-    label=f'New Data {latex_labels.get("psi_D_deg", "psi_D_deg")}'
+    label=f'New Data {shared_variables.latex_labels.get("psi_D_deg", "psi_D_deg")}'
 )
 plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
@@ -483,20 +337,20 @@ sns.boxplot(
     data=compensated_angle_height_dataset,
     x='Peça',
     y='h_D_mm',
-    palette=model_colors
+    palette=shared_variables.model_colors
 )
 plt.xlabel('Peça', fontsize=16)
-plt.ylabel(latex_labels.get('h_D_mm', 'h_D_mm'), fontsize=16)
-plt.title(f'Boxplot of {latex_labels.get("h_D_mm", "h_D_mm")} for merged dataset (input angle={latex_labels.get("psi_CAD_deg", "input angle")}=40, {latex_labels.get("sd_mm", "stepdown")}=0.7, {latex_labels.get("d_t_mm", "tool diameter")}=12)', fontsize=18)
+plt.ylabel(shared_variables.latex_labels.get('h_D_mm', 'h_D_mm'), fontsize=16)
+plt.title(f'Boxplot of {shared_variables.latex_labels.get("h_D_mm", "h_D_mm")} for merged dataset (input angle={shared_variables.latex_labels.get("psi_CAD_deg", "input angle")}=40, {shared_variables.latex_labels.get("sd_mm", "stepdown")}=0.7, {shared_variables.latex_labels.get("d_t_mm", "tool diameter")}=12)', fontsize=18)
 plt.grid(True, axis='y')
 plt.hlines(
-    y=new_data['h_D_mm'].iloc[0],
+    y=shared_variables.new_data['h_D_mm'].iloc[0],
     xmin=plt.gca().get_xlim()[0],
     xmax=plt.gca().get_xlim()[1],
     color='black',
     linestyle='--',
     linewidth=1,
-    label=f'New Data {latex_labels.get("h_D_mm", "h_D_mm")}'
+    label=f'New Data {shared_variables.latex_labels.get("h_D_mm", "h_D_mm")}'
 )
 plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
@@ -506,7 +360,7 @@ unique_models = compensated_angle_height_dataset['Peça'].unique()
 handles = []
 labels = []
 for model in unique_models:
-    color = model_colors.get(model, '#333333')
+    color = shared_variables.model_colors.get(model, '#333333')
     handles.append(plt.Line2D([0], [0], marker='s', color='w', markerfacecolor=color, markersize=10))
     labels.append(model)
 # Make space at the bottom and place the legend in one row
@@ -520,7 +374,7 @@ ordered_models = [m for m in preferred_order if m in present_models] + [m for m 
 handles = []
 labels = []
 for model in ordered_models:
-    color = model_colors.get(model, '#333333')
+    color = shared_variables.model_colors.get(model, '#333333')
     handles.append(plt.Line2D([0], [0], marker='s', color='w', markerfacecolor=color, markersize=10))
     labels.append('NN16' if model == 'NN(16)' else model)
 plt.legend(handles, labels, title='Peça (Model)', bbox_to_anchor=(0.5, -0.18), loc='upper center', ncol=max(1, len(handles)), fontsize=12, title_fontsize=13)
@@ -614,8 +468,8 @@ for i, (psi_min, psi_max) in enumerate(ranges):
             xlim_set = True
 
 
-    ax.set_xlabel(latex_labels.get('psi_D_deg', 'psi_D_deg'))
-    ax.set_ylabel(latex_labels.get('h_D_mm', 'h_D_mm'))
+    ax.set_xlabel(shared_variables.latex_labels.get('psi_D_deg', 'psi_D_deg'))
+    ax.set_ylabel(shared_variables.latex_labels.get('h_D_mm', 'h_D_mm'))
     ax.set_title(f'Angle vs Height for psi_D_deg in [{psi_min}, {psi_max}]')
     ax.grid(True)
     
